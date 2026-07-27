@@ -6,7 +6,7 @@ let paginaAtual = 1;
 
 const figurinhasPorPagina = 5;
 
-const totalPaginas = 7;
+let totalPaginas = 1;
 
 let animando = false;
 
@@ -53,6 +53,7 @@ async function carregarFigurinhas() {
                 `${API_URL}/figurinhas`
             );
 
+
         if (!resposta.ok) {
 
             throw new Error(
@@ -61,13 +62,41 @@ async function carregarFigurinhas() {
 
         }
 
+
         figurinhas =
             await resposta.json();
+
+
+        /*
+         * Calcula automaticamente a quantidade
+         * de páginas necessárias.
+         *
+         * A última página é reservada
+         * para futuras figurinhas.
+         */
+
+        const paginasDeFigurinhas =
+            Math.ceil(
+                figurinhas.length /
+                figurinhasPorPagina
+            );
+
+
+        totalPaginas =
+            paginasDeFigurinhas + 1;
+
 
         console.log(
             "Figurinhas carregadas:",
             figurinhas
         );
+
+
+        console.log(
+            "Total de páginas:",
+            totalPaginas
+        );
+
 
     } catch (erro) {
 
@@ -92,6 +121,7 @@ function criarFigurinha(figurinha) {
             "div"
         );
 
+
     card.className =
         "figurinha";
 
@@ -105,8 +135,10 @@ function criarFigurinha(figurinha) {
             "div"
         );
 
+
     numero.className =
         "numero-figurinha";
+
 
     numero.textContent =
         String(
@@ -126,17 +158,25 @@ function criarFigurinha(figurinha) {
             "img"
         );
 
+
     imagem.src =
         `${API_URL}/figurinhas/${figurinha.id}/imagem`;
 
+
     imagem.alt =
         figurinha.nome;
+
+
+    imagem.loading =
+        "lazy";
+
 
     imagem.onerror =
         function () {
 
             this.style.display =
                 "none";
+
 
             card.classList.add(
                 "sem-imagem"
@@ -154,6 +194,7 @@ function criarFigurinha(figurinha) {
             "h3"
         );
 
+
     nome.textContent =
         figurinha.nome;
 
@@ -167,6 +208,7 @@ function criarFigurinha(figurinha) {
             "p"
         );
 
+
     categoria.textContent =
         figurinha.categoria;
 
@@ -179,17 +221,21 @@ function criarFigurinha(figurinha) {
         numero
     );
 
+
     card.appendChild(
         imagem
     );
+
 
     card.appendChild(
         nome
     );
 
+
     card.appendChild(
         categoria
     );
+
 
     return card;
 
@@ -207,6 +253,7 @@ function criarEspacoVazio(numero) {
             "div"
         );
 
+
     card.className =
         "figurinha sem-imagem";
 
@@ -216,8 +263,10 @@ function criarEspacoVazio(numero) {
             "div"
         );
 
+
     numeroElemento.className =
         "numero-figurinha";
+
 
     numeroElemento.textContent =
         String(
@@ -233,6 +282,7 @@ function criarEspacoVazio(numero) {
             "h3"
         );
 
+
     nome.textContent =
         "Aguardando figurinha";
 
@@ -242,6 +292,7 @@ function criarEspacoVazio(numero) {
             "p"
         );
 
+
     categoria.textContent =
         "Espaço disponível";
 
@@ -250,13 +301,16 @@ function criarEspacoVazio(numero) {
         numeroElemento
     );
 
+
     card.appendChild(
         nome
     );
 
+
     card.appendChild(
         categoria
     );
+
 
     return card;
 
@@ -273,6 +327,7 @@ function criarPagina(numeroPagina) {
         document.createElement(
             "div"
         );
+
 
     pagina.className =
         "pagina";
@@ -306,6 +361,7 @@ function criarPagina(numeroPagina) {
 
         `;
 
+
         return pagina;
 
     }
@@ -320,11 +376,14 @@ function criarPagina(numeroPagina) {
             "div"
         );
 
+
     titulo.className =
         "titulo-pagina";
 
+
     titulo.textContent =
         `Página ${numeroPagina}`;
+
 
     pagina.appendChild(
         titulo
@@ -338,6 +397,7 @@ function criarPagina(numeroPagina) {
     const inicio =
         (numeroPagina - 1)
         * figurinhasPorPagina;
+
 
     const fim =
         inicio
@@ -357,6 +417,7 @@ function criarPagina(numeroPagina) {
         const figurinha =
             figurinhas[i];
 
+
         if (figurinha) {
 
             pagina.appendChild(
@@ -367,11 +428,6 @@ function criarPagina(numeroPagina) {
 
         } else {
 
-            /*
-             * Mantém o espaço reservado
-             * para uma futura figurinha.
-             */
-
             pagina.appendChild(
                 criarEspacoVazio(
                     i + 1
@@ -381,6 +437,7 @@ function criarPagina(numeroPagina) {
         }
 
     }
+
 
     return pagina;
 
@@ -403,17 +460,40 @@ function renderizarAlbum() {
             paginaAtual
         );
 
-    const direita =
-        criarPagina(
-            paginaAtual + 1
-        );
+
+    /*
+     * Se já estamos na última página,
+     * não existe uma página seguinte.
+     *
+     * Nesse caso, deixamos a página direita
+     * vazia para evitar problemas de renderização.
+     */
+
+    let direita = null;
+
+
+    if (
+        paginaAtual + 1 <= totalPaginas
+    ) {
+
+        direita =
+            criarPagina(
+                paginaAtual + 1
+            );
+
+    }
 
 
     paginaEsquerda.innerHTML =
         esquerda.innerHTML;
 
-    paginaDireita.innerHTML =
-        direita.innerHTML;
+
+    if (direita) {
+
+        paginaDireita.innerHTML =
+            direita.innerHTML;
+
+    }
 
 
     atualizarControles();
@@ -442,12 +522,32 @@ function atualizarControles() {
         paginaAtual === 1;
 
 
-    if (
-        paginaAtual === totalPaginas
-    ) {
+    /*
+     * IMPORTANTE:
+     *
+     * O álbum trabalha com duas páginas.
+     *
+     * Exemplo:
+     *
+     * página atual = 7
+     * página direita = 8
+     * total = 8
+     *
+     * Portanto, devemos considerar que
+     * chegamos ao final quando:
+     *
+     * paginaAtual + 1 >= totalPaginas
+     */
+
+    const ultimaAbertura =
+        paginaAtual + 1 >= totalPaginas;
+
+
+    if (ultimaAbertura) {
 
         btnProxima.textContent =
             "Fechar álbum";
+
 
         btnProxima.disabled =
             false;
@@ -456,6 +556,7 @@ function atualizarControles() {
 
         btnProxima.textContent =
             "Próxima ▶";
+
 
         btnProxima.disabled =
             false;
@@ -515,6 +616,7 @@ async function abrirAlbum() {
         "fechando"
     );
 
+
     capa.classList.add(
         "abrindo"
     );
@@ -527,6 +629,7 @@ async function abrirAlbum() {
                 "fechado",
                 "fechando"
             );
+
 
             albumContainer.classList.add(
                 "aberto"
@@ -549,8 +652,15 @@ async function abrirAlbum() {
 function fecharAlbum() {
 
     if (animando) {
+
         return;
+
     }
+
+
+    console.log(
+        "Fechando álbum..."
+    );
 
 
     animando = true;
@@ -559,6 +669,7 @@ function fecharAlbum() {
     albumContainer.classList.remove(
         "aberto"
     );
+
 
     albumContainer.classList.add(
         "fechando"
@@ -572,6 +683,7 @@ function fecharAlbum() {
                 "fechando"
             );
 
+
             albumContainer.classList.add(
                 "fechado"
             );
@@ -583,6 +695,7 @@ function fecharAlbum() {
             capa.classList.remove(
                 "abrindo"
             );
+
 
             capa.classList.add(
                 "fechando"
@@ -602,7 +715,13 @@ function fecharAlbum() {
                         "fechando"
                     );
 
+
                     animando = false;
+
+
+                    console.log(
+                        "Álbum fechado."
+                    );
 
                 },
                 100
@@ -622,20 +741,46 @@ function fecharAlbum() {
 function trocarAbertura(direcao) {
 
     if (animando) {
+
         return;
+
     }
 
+        console.log(
+        "NAVEGAÇÃO:",
+        "direção =", direcao,
+        "| página atual =", paginaAtual,
+        "| total =", totalPaginas,
+        "| última abertura =",
+        paginaAtual + 1 >= totalPaginas
+    );
 
     /* --------------------------------------------------------
-       FECHAR ÁLBUM
+       VERIFICAR SE ESTÁ NA ÚLTIMA ABERTURA
        -------------------------------------------------------- */
+
+    const ultimaAbertura =
+        paginaAtual + 1 >= totalPaginas;
+
+
+    /*
+     * Se o usuário clicar em "Próxima"
+     * quando já estiver na última abertura,
+     * fechamos o álbum.
+     */
 
     if (
         direcao === "proxima" &&
-        paginaAtual === totalPaginas
+        ultimaAbertura
     ) {
 
+        console.log(
+            "Última página alcançada. Fechando álbum..."
+        );
+
+
         fecharAlbum();
+
 
         return;
 
@@ -650,10 +795,20 @@ function trocarAbertura(direcao) {
         direcao === "proxima"
     ) {
 
+        /*
+         * Verifica se existe uma próxima dupla
+         * de páginas.
+         */
+
         if (
             paginaAtual + 2 >
             totalPaginas
         ) {
+
+            console.log(
+                "Não existe próxima página."
+            );
+
 
             return;
 
@@ -705,6 +860,11 @@ function trocarAbertura(direcao) {
     );
 
 
+    /*
+     * Aguarda a metade da animação
+     * para trocar o conteúdo.
+     */
+
     setTimeout(
         () => {
 
@@ -728,6 +888,10 @@ function trocarAbertura(direcao) {
     );
 
 
+    /*
+     * Finaliza a animação.
+     */
+
     setTimeout(
         () => {
 
@@ -735,6 +899,7 @@ function trocarAbertura(direcao) {
                 "virando-proxima",
                 "virando-anterior"
             );
+
 
             animando = false;
 

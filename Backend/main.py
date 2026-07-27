@@ -87,8 +87,8 @@ figurinhas = [
     {"id": 27, "nome": "Gi Space Coding", "categoria": "Brasil"},
     {"id": 28, "nome": "Vinicius Neves", "categoria": "Brasil"},
     {"id": 29, "nome": "Rafaela Ballerini", "categoria": "Brasil"},
-    {"id": 30, "nome": "Você", "categoria": "Brasil"},
-    {"id": 32, "nome": "Ada Lovelace", "categoria": "Programação"}
+    {"id": 30, "nome": "Luiz Asevedo", "categoria": "Brasil"},
+    {"id": 31, "nome": "Luiz Asevedo", "categoria": "Brasil"}
 ]
 
 
@@ -209,8 +209,13 @@ def enviar_imagem(
     }
 
 
-    extensao = Path(
+    nome_original = Path(
         arquivo.filename
+    ).name
+
+
+    extensao = Path(
+        nome_original
     ).suffix.lower()
 
 
@@ -222,10 +227,19 @@ def enviar_imagem(
         )
 
 
-    nome_arquivo = (
-        f"{id:02d}-"
-        f"{arquivo.filename}"
-    )
+    prefixo_id = f"{id:02d}-"
+
+
+    if nome_original.startswith(prefixo_id):
+
+        nome_arquivo = nome_original
+
+    else:
+
+        nome_arquivo = (
+            f"{prefixo_id}"
+            f"{nome_original}"
+        )
 
 
     caminho = (
