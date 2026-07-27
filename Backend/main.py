@@ -1,7 +1,10 @@
-from pathlib import Path
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from pathlib import Path
+import shutil
+
 
 app = FastAPI(
     title="Álbum de Figurinhas IA",
@@ -9,62 +12,127 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+# ============================================================
+# CORS
+# ============================================================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5500",
+        "http://127.0.0.1:5500"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ============================================================
+# CONFIGURAÇÃO DAS IMAGENS
+# ============================================================
+
+PASTA_FIGURINHAS = Path("figurinhas")
+
+PASTA_FIGURINHAS.mkdir(
+    exist_ok=True
+)
+
+
+# ============================================================
+# MODELO DE DADOS
+# ============================================================
+
+class Figurinha(BaseModel):
+    nome: str
+    categoria: str
+
+
+# ============================================================
+# BANCO DE DADOS TEMPORÁRIO
+# ============================================================
+
 figurinhas = [
-    {"id": 1, "nome": "Alan Turing", "categoria": "IA", "imagem": "01-alan-turing.jpg"},
-    {"id": 2, "nome": "John McCarthy", "categoria": "IA", "imagem": "02-john-mccarthy.jpg"},
-    {"id": 3, "nome": "Sam Altman", "categoria": "IA", "imagem": "03-sam-altman.jpg"},
-    {"id": 4, "nome": "Geoffrey Hinton", "categoria": "IA", "imagem": "04-geoffrey-hinton.jpg"},
-    {"id": 5, "nome": "Yann LeCun", "categoria": "IA", "imagem": "05-yann-lecun.jpg"},
+    {"id": 1, "nome": "Alan Turing", "categoria": "IA"},
+    {"id": 2, "nome": "John McCarthy", "categoria": "IA"},
+    {"id": 3, "nome": "Sam Altman", "categoria": "IA"},
+    {"id": 4, "nome": "Geoffrey Hinton", "categoria": "IA"},
+    {"id": 5, "nome": "Yann LeCun", "categoria": "IA"},
 
-    {"id": 6, "nome": "Guido van Rossum", "categoria": "Python", "imagem": "06-guido-van-rossum.jpg"},
-    {"id": 7, "nome": "Tim Peters", "categoria": "Python", "imagem": "07-tim-peters.jpg"},
-    {"id": 8, "nome": "Raymond Hettinger", "categoria": "Python", "imagem": "08-raymond-hettinger.jpg"},
-    {"id": 9, "nome": "Travis Oliphant", "categoria": "Python", "imagem": "09-travis-oliphant.jpg"},
-    {"id": 10, "nome": "Wes McKinney", "categoria": "Python", "imagem": "10-wes-mckinney.jpg"},
+    {"id": 6, "nome": "Guido van Rossum", "categoria": "Python"},
+    {"id": 7, "nome": "Tim Peters", "categoria": "Python"},
+    {"id": 8, "nome": "Raymond Hettinger", "categoria": "Python"},
+    {"id": 9, "nome": "Travis Oliphant", "categoria": "Python"},
+    {"id": 10, "nome": "Wes McKinney", "categoria": "Python"},
 
-    {"id": 11, "nome": "Edgar F. Codd", "categoria": "Banco de Dados", "imagem": "11-edgar-codd.jpg"},
-    {"id": 12, "nome": "Larry Ellison", "categoria": "Banco de Dados", "imagem": "12-larry-ellison.jpg"},
-    {"id": 13, "nome": "Michael Widenius", "categoria": "Banco de Dados", "imagem": "13-michael-widenius.jpg"},
-    {"id": 14, "nome": "Salvatore Sanfilippo", "categoria": "Banco de Dados", "imagem": "14-salvatore-sanfilippo.jpg"},
-    {"id": 15, "nome": "Eliot Horowitz", "categoria": "Banco de Dados", "imagem": "15-eliot-horowitz.jpg"},
+    {"id": 11, "nome": "Edgar F. Codd", "categoria": "Banco de Dados"},
+    {"id": 12, "nome": "Larry Ellison", "categoria": "Banco de Dados"},
+    {"id": 13, "nome": "Michael Widenius", "categoria": "Banco de Dados"},
+    {"id": 14, "nome": "Salvatore Sanfilippo", "categoria": "Banco de Dados"},
+    {"id": 15, "nome": "Eliot Horowitz", "categoria": "Banco de Dados"},
 
-    {"id": 16, "nome": "Linus Torvalds", "categoria": "Sistemas Operacionais", "imagem": "16-linus-torvalds.jpg"},
-    {"id": 17, "nome": "Dennis Ritchie", "categoria": "Sistemas Operacionais", "imagem": "17-dennis-ritchie.jpg"},
-    {"id": 18, "nome": "Richard Stallman", "categoria": "Sistemas Operacionais", "imagem": "18-richard-stallman.jpg"},
-    {"id": 19, "nome": "Bill Gates", "categoria": "Sistemas Operacionais", "imagem": "19-bill-gates.jpg"},
-    {"id": 20, "nome": "Steve Jobs", "categoria": "Sistemas Operacionais", "imagem": "20-steve-jobs.jpg"},
+    {"id": 16, "nome": "Linus Torvalds", "categoria": "Sistemas Operacionais"},
+    {"id": 17, "nome": "Dennis Ritchie", "categoria": "Sistemas Operacionais"},
+    {"id": 18, "nome": "Richard Stallman", "categoria": "Sistemas Operacionais"},
+    {"id": 19, "nome": "Bill Gates", "categoria": "Sistemas Operacionais"},
+    {"id": 20, "nome": "Steve Jobs", "categoria": "Sistemas Operacionais"},
 
-    {"id": 21, "nome": "Paulo Silveira", "categoria": "Brasil", "imagem": "21-paulo-silveira.jpg"},
-    {"id": 22, "nome": "Guilherme Silveira", "categoria": "Brasil", "imagem": "22-guilherme-silveira.jpg"},
-    {"id": 23, "nome": "Gustavo Guanabara", "categoria": "Brasil", "imagem": "23-gustavo-guanabara.jpg"},
-    {"id": 24, "nome": "Maurício Aniche", "categoria": "Brasil", "imagem": "24-mauricio-aniche.jpg"},
-    {"id": 25, "nome": "Andre David", "categoria": "Brasil", "imagem": "25-andre-david.jpg"},
-    {"id": 26, "nome": "Guilherme Lima", "categoria": "Brasil", "imagem": "26-guilherme-lima.jpg"},
-    {"id": 27, "nome": "Gi Space Coding", "categoria": "Brasil", "imagem": "27-gi-space-coding.jpg"},
-    {"id": 28, "nome": "Vinicius Neves", "categoria": "Brasil", "imagem": "28-vinicius-neves.jpg"},
-    {"id": 29, "nome": "Rafaela Ballerini", "categoria": "Brasil", "imagem": "29-rafaela-ballerini.jpg"},
-    {"id": 30, "nome": "Você", "categoria": "Brasil", "imagem": "30-voce.jpg"}
+    {"id": 21, "nome": "Paulo Silveira", "categoria": "Brasil"},
+    {"id": 22, "nome": "Guilherme Silveira", "categoria": "Brasil"},
+    {"id": 23, "nome": "Gustavo Guanabara", "categoria": "Brasil"},
+    {"id": 24, "nome": "Maurício Aniche", "categoria": "Brasil"},
+    {"id": 25, "nome": "Andre David", "categoria": "Brasil"},
+    {"id": 26, "nome": "Guilherme Lima", "categoria": "Brasil"},
+    {"id": 27, "nome": "Gi Space Coding", "categoria": "Brasil"},
+    {"id": 28, "nome": "Vinicius Neves", "categoria": "Brasil"},
+    {"id": 29, "nome": "Rafaela Ballerini", "categoria": "Brasil"},
+    {"id": 30, "nome": "Você", "categoria": "Brasil"},
+    {"id": 32, "nome": "Ada Lovelace", "categoria": "Programação"}
 ]
 
-PASTA_FIGURINHAS = Path(__file__).parent / "figurinhas"
 
+# ============================================================
+# PÁGINA INICIAL
+# ============================================================
 
-@app.get("/", summary="Página inicial", tags=["Home"])
+@app.get(
+    "/",
+    summary="Página inicial",
+    tags=["Home"]
+)
 def home():
     return {
         "mensagem": "Bem-vindo ao Álbum de Figurinhas IA!"
     }
 
 
-@app.get("/figurinhas", summary="Listar figurinhas", tags=["Figurinhas"])
+# ============================================================
+# LISTAR FIGURINHAS
+# ============================================================
+
+@app.get(
+    "/figurinhas",
+    summary="Listar figurinhas",
+    tags=["Figurinhas"]
+)
 def listar_figurinhas():
     return figurinhas
 
 
-@app.get("/figurinhas/{id}", summary="Buscar figurinha por ID", tags=["Figurinhas"])
+# ============================================================
+# BUSCAR FIGURINHA POR ID
+# ============================================================
+
+@app.get(
+    "/figurinhas/{id}",
+    summary="Buscar figurinha por ID",
+    tags=["Figurinhas"]
+)
 def buscar_figurinha(id: int):
 
     for figurinha in figurinhas:
+
         if figurinha["id"] == id:
             return figurinha
 
@@ -74,26 +142,139 @@ def buscar_figurinha(id: int):
     )
 
 
-@app.get("/figurinhas/{id}/imagem", summary="Exibir imagem da figurinha", tags=["Figurinhas"])
-def imagem_figurinha(id: int):
+# ============================================================
+# CADASTRAR NOVA FIGURINHA
+# ============================================================
 
-    figurinha = next(
-        (f for f in figurinhas if f["id"] == id),
-        None
+@app.post(
+    "/figurinhas",
+    summary="Cadastrar nova figurinha",
+    tags=["Figurinhas"]
+)
+def cadastrar_figurinha(figurinha: Figurinha):
+
+    novo_id = max(
+        item["id"]
+        for item in figurinhas
+    ) + 1
+
+    nova_figurinha = {
+        "id": novo_id,
+        "nome": figurinha.nome,
+        "categoria": figurinha.categoria
+    }
+
+    figurinhas.append(
+        nova_figurinha
     )
 
+    return nova_figurinha
+
+
+# ============================================================
+# ENVIAR IMAGEM DA FIGURINHA
+# ============================================================
+
+@app.post(
+    "/figurinhas/{id}/imagem",
+    summary="Enviar imagem da figurinha",
+    tags=["Imagens"]
+)
+def enviar_imagem(
+    id: int,
+    arquivo: UploadFile = File(...)
+):
+
+    figurinha = None
+
+    for item in figurinhas:
+
+        if item["id"] == id:
+            figurinha = item
+            break
+
     if figurinha is None:
+
         raise HTTPException(
             status_code=404,
             detail="Figurinha não encontrada."
         )
 
-    caminho = PASTA_FIGURINHAS / figurinha["imagem"]
 
-    if not caminho.exists():
+    extensoes_permitidas = {
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp"
+    }
+
+
+    extensao = Path(
+        arquivo.filename
+    ).suffix.lower()
+
+
+    if extensao not in extensoes_permitidas:
+
         raise HTTPException(
-            status_code=404,
-            detail="Arquivo de imagem não encontrado."
+            status_code=400,
+            detail="Formato de imagem não permitido."
         )
 
-    return FileResponse(caminho)
+
+    nome_arquivo = (
+        f"{id:02d}-"
+        f"{arquivo.filename}"
+    )
+
+
+    caminho = (
+        PASTA_FIGURINHAS /
+        nome_arquivo
+    )
+
+
+    with caminho.open("wb") as destino:
+
+        shutil.copyfileobj(
+            arquivo.file,
+            destino
+        )
+
+
+    return {
+        "mensagem": "Imagem enviada com sucesso.",
+        "id": id,
+        "arquivo": nome_arquivo
+    }
+
+
+# ============================================================
+# EXIBIR IMAGEM DA FIGURINHA
+# ============================================================
+
+@app.get(
+    "/figurinhas/{id}/imagem",
+    summary="Exibir imagem da figurinha",
+    tags=["Imagens"]
+)
+def imagem_figurinha(id: int):
+
+    arquivos = list(
+        PASTA_FIGURINHAS.glob(
+            f"{id:02d}-*"
+        )
+    )
+
+
+    if not arquivos:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Imagem da figurinha não encontrada."
+        )
+
+
+    return FileResponse(
+        arquivos[0]
+    )
