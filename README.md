@@ -363,17 +363,29 @@ Fechar álbum
 
 Após o fechamento, o usuário retorna à capa.
 
-📸 Demonstração
+# 📸 Demonstração
 
-Imagens e GIF demonstrativo serão adicionados na próxima etapa do projeto.
+## 📕 Capa do álbum
 
-Em breve:
+<p align="center">
+  <img src="assets/capa.png" alt="Capa do Álbum de Figurinhas IA" width="800">
+</p>
 
-assets/
-├── capa.png
-├── album-aberto.png
-├── paginas.png
-└── album-demo.gif
+---
+
+## 📖 Álbum aberto
+
+<p align="center">
+  <img src="assets/album-aberto.png" alt="Álbum de Figurinhas IA aberto" width="800">
+</p>
+
+---
+
+## 🖼️ Coleção de figurinhas
+
+<p align="center">
+  <img src="assets/colecao.png" alt="Coleção de Figurinhas IA" width="800">
+</p>
 
 📌 Status do projeto
 
