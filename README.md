@@ -7,70 +7,88 @@
   <img src="https://img.shields.io/badge/JavaScript-Frontend-yellow?style=for-the-badge&logo=javascript&logoColor=black">
   <img src="https://img.shields.io/badge/HTML5-Frontend-orange?style=for-the-badge&logo=html5&logoColor=white">
   <img src="https://img.shields.io/badge/CSS3-Design-blue?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-GitHub-black?style=for-the-badge&logo=git&logoColor=white">
 
 </p>
 
 <p align="center">
+  <strong>Um álbum digital interativo desenvolvido com Python, FastAPI, HTML, CSS e JavaScript.</strong>
+</p>
 
-  <strong>Um álbum digital interativo com temática de Inteligência Artificial, programação, tecnologia e desenvolvimento.</strong>
-
+<p align="center">
+  Projeto desenvolvido como prática de programação, desenvolvimento de APIs,
+  integração entre Backend e Frontend e utilização de Git e GitHub.
 </p>
 
 ---
 
 ## 📖 Sobre o projeto
 
-O **Álbum de Figurinhas IA** é uma aplicação web desenvolvida durante a **Imersão Alura**, com o objetivo de unir programação, tecnologia e uma experiência visual interativa.
+O **Álbum de Figurinhas IA** é uma aplicação web interativa criada para reunir personagens e profissionais importantes das áreas de Inteligência Artificial, Python, Banco de Dados, Sistemas Operacionais e tecnologia no Brasil.
 
-O projeto apresenta uma coleção de **31 figurinhas**, reunindo personalidades importantes das áreas de:
+O projeto simula a experiência de um álbum físico de figurinhas, permitindo:
 
-- 🤖 Inteligência Artificial
-- 🐍 Python
-- 🗄️ Banco de Dados
-- 💻 Sistemas Operacionais
-- 🇧🇷 Tecnologia e programação no Brasil
-- 👨‍💻 Programação
+- Abrir o álbum;
+- Navegar pelas páginas;
+- Visualizar as figurinhas;
+- Avançar e retornar entre as páginas;
+- Visualizar informações dos personagens;
+- Carregar imagens através de uma API;
+- Fechar automaticamente o álbum ao chegar à última página;
+- Retornar para a capa após o fechamento.
 
-A aplicação possui um álbum digital com capa, páginas duplas, navegação entre páginas e fechamento automático ao chegar ao final da coleção.
-
----
-
-# 🎯 Objetivos
-
-O projeto foi desenvolvido com os seguintes objetivos:
-
-- Praticar desenvolvimento de aplicações web.
-- Integrar frontend e backend.
-- Criar uma API REST utilizando FastAPI.
-- Trabalhar com JavaScript para manipulação dinâmica da interface.
-- Utilizar HTML5 e CSS3 para construção da interface.
-- Trabalhar com arquivos e imagens no backend.
-- Aprender conceitos de organização de projetos.
-- Utilizar Git e GitHub para versionamento.
-- Criar um projeto completo para portfólio.
+O projeto possui uma arquitetura simples composta por **Backend + Frontend**, permitindo praticar conceitos fundamentais de desenvolvimento web.
 
 ---
 
-# ✨ Funcionalidades
+## 🎯 Objetivos
 
-## 📕 Álbum digital
+Este projeto teve como principais objetivos:
 
-- Capa do álbum.
-- Animação de abertura.
-- Animação de fechamento.
-- Navegação entre páginas.
-- Visualização de duas páginas simultaneamente.
-- Indicador da página atual.
-- Botão **Anterior**.
-- Botão **Próxima**.
-- Botão **Fechar álbum** na última abertura.
-- Retorno automático para a capa.
+- Praticar desenvolvimento de APIs REST com FastAPI;
+- Desenvolver um Frontend utilizando HTML, CSS e JavaScript;
+- Trabalhar com integração entre Frontend e Backend;
+- Aprender a disponibilizar imagens através de uma API;
+- Trabalhar com requisições HTTP;
+- Praticar manipulação do DOM com JavaScript;
+- Criar animações e interações de interface;
+- Organizar um projeto utilizando Git;
+- Publicar e versionar o projeto no GitHub;
+- Criar uma documentação profissional para portfólio.
 
-## 🖼️ Figurinhas
+---
+
+# 🖼 Demonstração
+
+## 🏠 Capa do álbum
+
+<p align="center">
+  <img src="assets/capa.png" alt="Capa do Álbum de Figurinhas IA" width="700">
+</p>
+
+---
+
+## 📖 Álbum aberto
+
+<p align="center">
+  <img src="assets/album-aberto.png" alt="Álbum de Figurinhas IA aberto" width="900">
+</p>
+
+---
+
+## 🃏 Coleção de figurinhas
+
+<p align="center">
+  <img src="assets/colecao.png" alt="Coleção de Figurinhas IA" width="900">
+</p>
+
+---
+
+# 🃏 Coleção
 
 O álbum possui atualmente **31 figurinhas**.
 
-### 🤖 Inteligência Artificial
+## 🤖 Inteligência Artificial
 
 | Nº | Nome |
 |---:|---|
@@ -80,7 +98,7 @@ O álbum possui atualmente **31 figurinhas**.
 | 04 | Geoffrey Hinton |
 | 05 | Yann LeCun |
 
-### 🐍 Python
+## 🐍 Python
 
 | Nº | Nome |
 |---:|---|
@@ -90,7 +108,7 @@ O álbum possui atualmente **31 figurinhas**.
 | 09 | Travis Oliphant |
 | 10 | Wes McKinney |
 
-### 🗄️ Banco de Dados
+## 🗄 Banco de Dados
 
 | Nº | Nome |
 |---:|---|
@@ -100,7 +118,7 @@ O álbum possui atualmente **31 figurinhas**.
 | 14 | Salvatore Sanfilippo |
 | 15 | Eliot Horowitz |
 
-### 💻 Sistemas Operacionais
+## 💻 Sistemas Operacionais
 
 | Nº | Nome |
 |---:|---|
@@ -110,7 +128,7 @@ O álbum possui atualmente **31 figurinhas**.
 | 19 | Bill Gates |
 | 20 | Steve Jobs |
 
-### 🇧🇷 Brasil
+## 🇧🇷 Tecnologia no Brasil
 
 | Nº | Nome |
 |---:|---|
@@ -126,159 +144,158 @@ O álbum possui atualmente **31 figurinhas**.
 | 30 | Luiz Asevedo |
 | 31 | Luiz |
 
----
-
-# 🛠️ Tecnologias utilizadas
-
-## Backend
-
-- Python
-- FastAPI
-- Uvicorn
-- Pydantic
-- Python Multipart
-- CORS
-- API REST
-
-## Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-- Fetch API
-- Manipulação do DOM
-- CSS Transitions
-- CSS Transformations
-
-## Ferramentas
-
-- Visual Studio Code
-- Git
-- GitHub
-- PowerShell
-- Navegador Google Chrome
+As figurinhas **30 e 31 representam o autor do projeto**.
 
 ---
 
-# 🏗️ Arquitetura do projeto
+# 🧠 Tecnologias utilizadas
 
-O projeto está dividido em duas partes principais:
+| Tecnologia | Utilização |
+|---|---|
+| Python | Desenvolvimento do Backend |
+| FastAPI | Criação da API REST |
+| Uvicorn | Servidor da aplicação FastAPI |
+| Pydantic | Modelagem dos dados da API |
+| HTML5 | Estrutura do Frontend |
+| CSS3 | Estilização, animações e layout |
+| JavaScript | Lógica e interatividade |
+| Fetch API | Comunicação com o Backend |
+| Git | Controle de versão |
+| GitHub | Hospedagem e versionamento |
+| VS Code | Ambiente de desenvolvimento |
+
+---
+
+
+# 🏗 Estrutura do projeto
 
 ```text
 ALBUM-FIGURINHAS-IA
 │
 ├── Backend
-│   │
-│   ├── figurinhas/
+│   ├── figurinhas
 │   │   ├── 01-alan-turing.jpg
 │   │   ├── 02-john-mccarthy.jpg
+│   │   ├── 03-sam.jpg
 │   │   ├── ...
+│   │   ├── 29-Rafa.jpeg
 │   │   ├── 30-luiz-asevedo.jpg
 │   │   └── 31-Luiz.jpg
 │   │
 │   ├── main.py
-│   ├── requirements.txt
-│   └── .gitignore
+│   └── requirements.txt
 │
 ├── Frontend
-│   │
 │   ├── index.html
 │   ├── app.js
 │   └── style.css
 │
+├── assets
+│   ├── capa.png
+│   ├── album-aberto.png
+│   └── colecao.png
+│
 ├── .gitignore
-├── LICENSE
 └── README.md
+```
 
-🔌 API
+🔄 Funcionamento do álbum
 
-O backend foi desenvolvido utilizando FastAPI.
+O álbum utiliza uma navegação baseada em duas páginas por abertura.
 
-Página inicial
+Abertura 1 → páginas 1 e 2
+Abertura 2 → páginas 3 e 4
+Abertura 3 → páginas 5 e 6
+Abertura 4 → páginas 7 e 8
 
-GET /
+Ao chegar à última abertura, o botão de navegação muda automaticamente de:
 
-Retorna:
+Próxima ▶
 
-{
-  "mensagem": "Bem-vindo ao Álbum de Figurinhas IA!"
-}
+para:
 
-Listar figurinhas
+Fechar álbum
 
-GET /figurinhas
+Ao clicar no botão, o álbum executa a animação de fechamento e retorna para a capa.
 
-Retorna a coleção de figurinhas cadastradas.
+🔄 Comunicação entre Frontend e Backend
 
-Buscar figurinha
+O Frontend realiza requisições HTTP para a API desenvolvida em FastAPI.
 
-GET /figurinhas/{id}
+O Backend disponibiliza:
 
-Exemplo:
+Dados das figurinhas;
+Identificação por ID;
+Imagens das figurinhas.
 
-GET /figurinhas/1
+Fluxo simplificado:
 
-Exibir imagem
-
-GET /figurinhas/{id}/imagem
-
-Exemplo:
-
-GET /figurinhas/1/imagem
-
-Cadastrar figurinha
-
-POST /figurinhas
-
-Enviar imagem
-
-POST /figurinhas/{id}/imagem
+┌──────────────────────┐
+│       FRONTEND       │
+│                      │
+│   HTML + CSS + JS    │
+└──────────┬───────────┘
+           │
+           │ HTTP
+           ▼
+┌──────────────────────┐
+│       FASTAPI        │
+│                      │
+│       main.py        │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│      FIGURINHAS      │
+│                      │
+│  arquivos de imagem  │
+└──────────────────────┘
 
 🚀 Como executar o projeto
+1. Pré-requisitos
 
-1. Clonar o repositório
+Tenha instalado:
 
+Python 3.x
+Git
+VS Code ou outro editor de código
+
+2. Clonar o repositório
 git clone https://github.com/LuizAntonioAsevedo/Album-Figurinhas-IA.git
 
 Entrar na pasta:
 
 cd Album-Figurinhas-IA
 
-🐍 Backend
+⚙️ Backend
 
 Entrar na pasta:
 
 cd Backend
+Criar ambiente virtual
 
-Criar o ambiente virtual:
+Caso ainda não exista:
 
 python -m venv .venv
 
-Ativar o ambiente virtual no Windows:
+Ativar o ambiente virtual
 
-.venv\Scripts\Activate.ps1
+No Windows PowerShell:
 
-Instalar as dependências:
+.\.venv\Scripts\Activate.ps1
 
+O terminal deverá apresentar algo semelhante a:
+
+(.venv) PS C:\...\Album-Figurinhas-IA\Backend>
+Instalar dependências
 pip install -r requirements.txt
 
-Iniciar o servidor:
-
+Iniciar o Backend
 python -m uvicorn main:app --reload --port 8001
 
-O backend ficará disponível em:
+O servidor será disponibilizado em:
 
 http://127.0.0.1:8001
-
-📚 Documentação da API
-
-O FastAPI disponibiliza automaticamente a documentação interativa.
-
-Acesse:
-
-http://127.0.0.1:8001/docs
-
-A documentação permite testar diretamente os endpoints da API.
 
 🌐 Frontend
 
@@ -292,174 +309,325 @@ Execute:
 
 python -m http.server 5500
 
-A aplicação ficará disponível em:
+Depois abra o navegador:
 
 http://localhost:5500
 
-🔄 Funcionamento
+📡 API
 
-O fluxo básico da aplicação é:
+O Backend foi desenvolvido utilizando FastAPI.
 
-                  ┌───────────────────┐
-                  │      USUÁRIO      │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │     FRONTEND      │
-                  │ HTML + CSS + JS   │
-                  └─────────┬─────────┘
-                            │
-                            │ HTTP
-                            ▼
-                  ┌───────────────────┐
-                  │      FASTAPI      │
-                  │      BACKEND      │
-                  └─────────┬─────────┘
-                            │
-                            ▼
-                  ┌───────────────────┐
-                  │    FIGURINHAS     │
-                  │     /figurinhas   │
-                  └───────────────────┘
+Página inicial
+GET /
 
-🎬 Experiência do álbum
+Retorna uma mensagem de boas-vindas.
 
-A aplicação possui uma navegação baseada em páginas duplas:
+Listar todas as figurinhas
+GET /figurinhas
 
-┌─────────────────┬─────────────────┐
-│                 │                 │
-│    Página 1     │    Página 2     │
-│                 │                 │
-└─────────────────┴─────────────────┘
+Retorna a lista completa das 31 figurinhas.
 
-              ↓ Próxima
+Buscar uma figurinha
+GET /figurinhas/{id}
 
-┌─────────────────┬─────────────────┐
-│                 │                 │
-│    Página 3     │    Página 4     │
-│                 │                 │
-└─────────────────┴─────────────────┘
+Exemplo:
 
-              ↓ Próxima
+GET /figurinhas/1
 
-                 ...
+Exibir imagem de uma figurinha
+GET /figurinhas/{id}/imagem
 
-              ↓
+Exemplo:
 
-┌─────────────────┬─────────────────┐
-│    Página 7     │    Página 8     │
-│                 │                 │
-│                 │   ÚLTIMA        │
-└─────────────────┴─────────────────┘
+GET /figurinhas/1/imagem
 
-              ↓
+Cadastrar uma nova figurinha
+POST /figurinhas
 
-          Fechar álbum
+Exemplo de dados:
 
-Ao chegar à última abertura, o botão muda automaticamente para:
+{
+  "nome": "Nome da Figurinha",
+  "categoria": "Categoria"
+}
+
+Enviar imagem de uma figurinha
+POST /figurinhas/{id}/imagem
+
+Formatos aceitos pela API:
+
+.jpg
+.jpeg
+.png
+.webp
+
+📖 Documentação automática da API
+
+O FastAPI disponibiliza uma documentação interativa através do Swagger.
+
+Com o Backend em execução, acesse:
+
+http://127.0.0.1:8001/docs
+
+A interface permite visualizar e testar os endpoints diretamente pelo navegador.
+
+🎨 Recursos do Frontend
+
+O Frontend possui:
+
+Capa interativa;
+Animação de abertura;
+Animação de fechamento;
+Navegação entre páginas;
+Botão Anterior;
+Botão Próxima;
+Indicador de páginas;
+Exibição das figurinhas;
+Integração com a API;
+Carregamento dinâmico das imagens;
+Identificação da última abertura;
+Botão Fechar álbum;
+Retorno para a capa após o fechamento.
+
+🧩 Lógica de navegação
+
+A navegação foi construída para trabalhar com duas páginas simultaneamente.
+
+Exemplo:
+
+Página atual = 1
+→ mostra páginas 1 e 2
+
+Página atual = 3
+→ mostra páginas 3 e 4
+
+Página atual = 5
+→ mostra páginas 5 e 6
+
+Página atual = 7
+→ mostra páginas 7 e 8
+
+Quando:
+
+Página atual + 1 >= total de páginas
+
+o sistema identifica que chegou à última abertura.
+
+Nesse momento:
+
+Próxima ▶
+
+é substituído por:
 
 Fechar álbum
 
-Após o fechamento, o usuário retorna à capa.
+🖼 Tratamento das imagens
 
-# 📸 Demonstração
+As imagens ficam armazenadas no diretório:
 
-## 📕 Capa do álbum
+Backend/figurinhas/
 
-<p align="center">
-  <img src="assets/capa.png" alt="Capa do Álbum de Figurinhas IA" width="800">
-</p>
+A API procura automaticamente a imagem correspondente ao ID da figurinha.
 
----
+Exemplos:
 
-## 📖 Álbum aberto
+ID 01
+↓
+01-alan-turing.jpg
 
-<p align="center">
-  <img src="assets/album-aberto.png" alt="Álbum de Figurinhas IA aberto" width="800">
-</p>
+ID 30
+↓
+30-luiz-asevedo.jpg
 
----
+ID 31
+↓
+31-Luiz.jpg
 
-## 🖼️ Coleção de figurinhas
+Isso permite que o Frontend solicite as imagens através da API.
 
-<p align="center">
-  <img src="assets/colecao.png" alt="Coleção de Figurinhas IA" width="800">
-</p>
+🔐 CORS
+
+O Backend possui configuração de CORS para permitir a comunicação entre:
+
+Frontend
+http://localhost:5500
+
+e:
+
+Backend
+http://127.0.0.1:8001
+
+Essa configuração permite que o navegador realize as requisições necessárias entre as duas aplicações durante o desenvolvimento local.
+
+🧪 Testes realizados
+
+Durante o desenvolvimento foram realizados testes para validar:
+
+Inicialização do Backend;
+Inicialização do Frontend;
+Comunicação entre Frontend e Backend;
+Listagem das figurinhas;
+Carregamento das imagens;
+Navegação para próxima página;
+Navegação para página anterior;
+Identificação da última abertura;
+Alteração do botão para Fechar álbum;
+Fechamento do álbum;
+Retorno para a capa;
+Carregamento das 31 figurinhas;
+Funcionamento das imagens das figurinhas 30 e 31;
+Versionamento com Git;
+Publicação no GitHub.
 
 📌 Status do projeto
+✅ Versão 1.0 — Concluída
 
-Versão 1.0 — Concluída ✅
- Backend FastAPI
- API REST
- Frontend HTML
- CSS
- JavaScript
- Cadastro das figurinhas
- Carregamento das imagens
- Álbum digital
- Navegação entre páginas
- Página dupla
- Fechamento automático
- Retorno para a capa
- Git
- GitHub
- Primeiro commit
- Versionamento da versão 1.0
+O projeto encontra-se funcional e versionado no GitHub.
+
+Principais funcionalidades da primeira versão:
+
+✅ Backend FastAPI
+✅ API REST
+✅ Frontend HTML/CSS/JavaScript
+✅ 31 figurinhas
+✅ Carregamento dinâmico das imagens
+✅ Navegação entre páginas
+✅ Animações
+✅ Abertura do álbum
+✅ Fechamento do álbum
+✅ Retorno para a capa
+✅ Documentação da API
+✅ Git
+✅ GitHub
+✅ README profissional
 
 🔮 Próximas melhorias
 
-O projeto continuará evoluindo.
+Algumas funcionalidades podem ser adicionadas em versões futuras:
 
-Possíveis próximas etapas:
+Banco de dados real;
+Sistema de usuários;
+Login;
+Cadastro de colecionadores;
+Controle de figurinhas adquiridas;
+Identificação de figurinhas repetidas;
+Sistema de troca de figurinhas;
+Busca por nome;
+Filtro por categoria;
+Página individual da figurinha;
+Contador de figurinhas;
+Percentual do álbum completo;
+Efeitos sonoros;
+Responsividade aprimorada para celulares;
+Deploy do Backend;
+Deploy do Frontend;
+Banco de dados em produção.
 
- Adicionar screenshots ao README
- Criar GIF demonstrativo
- Melhorar responsividade para celulares
- Criar sistema de coleção de figurinhas
- Identificar figurinhas já visualizadas
- Adicionar busca por nome
- Adicionar filtro por categoria
- Criar banco de dados real
- Implementar cadastro persistente
- Criar sistema de autenticação
- Publicar a aplicação online
- Criar Release oficial no GitHub
+📈 Evolução do projeto
 
-🎓 Aprendizados
+O projeto foi desenvolvido de forma incremental:
 
-Durante o desenvolvimento deste projeto foram praticados conceitos de:
+Ideia
+  ↓
+Criação do Backend
+  ↓
+Criação da API
+  ↓
+Criação do Frontend
+  ↓
+Integração API + Frontend
+  ↓
+Implementação das figurinhas
+  ↓
+Implementação das animações
+  ↓
+Correção da navegação
+  ↓
+Correção do fechamento do álbum
+  ↓
+Testes
+  ↓
+Git
+  ↓
+GitHub
+  ↓
+README profissional
+  ↓
+Versão 1.0
 
-Desenvolvimento de API REST.
-FastAPI.
-Python.
-Pydantic.
-Uvicorn.
-CORS.
-HTML.
-CSS.
-JavaScript.
-Fetch API.
-Manipulação do DOM.
-Animações CSS.
-Integração frontend/backend.
-Organização de projetos.
-Git.
-GitHub.
-Versionamento de código.
+💡 Aprendizados
+
+Durante o desenvolvimento deste projeto foram praticados conceitos importantes de:
+
+Backend
+Python;
+FastAPI;
+Uvicorn;
+APIs REST;
+Rotas HTTP;
+Pydantic;
+Upload de arquivos;
+Manipulação de arquivos;
+CORS;
+Respostas HTTP.
+Frontend
+HTML5;
+CSS3;
+JavaScript;
+DOM;
+Eventos;
+Fetch API;
+Manipulação de classes CSS;
+Animações;
+Controle de estado da interface;
+Integração com APIs.
+
+Desenvolvimento
+Estruturação de projetos;
+Ambiente virtual Python;
+Organização de arquivos;
+Debugging;
+Testes;
+Git;
+GitHub;
+Commits;
+README e documentação.
+
+🗂 Controle de versão
+
+O projeto utiliza Git para controle de versão.
+
+Exemplo de fluxo utilizado:
+
+git status
+git add .
+git commit -m "mensagem do commit"
+git push origin main
+
+A branch principal utilizada é:
+
+main
 
 👨‍💻 Autor
-Luiz Antonio Asevedo
+Luiz Asevedo
 
-Projeto desenvolvido como parte da jornada de aprendizado em programação, inteligência artificial e desenvolvimento de aplicações.
+Projeto desenvolvido como parte da jornada de aprendizado em:
 
-📍 São Paulo — SP
+Inteligência Artificial;
+Programação;
+Desenvolvimento Web;
+Python;
+APIs;
+Git e GitHub.
+
+⭐ Projeto
+
+Este projeto representa uma etapa prática de aprendizado e evolução no desenvolvimento de aplicações utilizando Inteligência Artificial e tecnologias modernas de programação.
 
 📄 Licença
 
-Este projeto está disponibilizado sob a licença definida no arquivo:
+Este projeto foi desenvolvido para fins educacionais e de portfólio.
 
-LICENSE
+Sinta-se à vontade para estudar a estrutura, adaptar o código e utilizar o projeto como referência para seus próprios estudos.
 
-
-
+<p align="center"> <strong>🏆 Álbum de Figurinhas IA — Versão 1.0</strong> </p> <p align="center"> Desenvolvido com Python, FastAPI, HTML, CSS e JavaScript. </p>
